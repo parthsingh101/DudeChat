@@ -1,26 +1,101 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ==========================================
+   RED HORROR THEME — Dark & Light Mode
+   ========================================== */
+
+/* DARK MODE (default) */
+:root,
+[data-theme="dark"] {
+  --bg:          #0a0000;      /* near-black with a hint of red */
+  --bg-2:        #100508;      /* slightly lighter panel bg */
+  --bg-3:        #180a0e;      /* card / sidebar bg */
+  --border:      #2a0e14;      /* subtle dark red border */
+  --border-2:    #3d1520;      /* slightly lighter border */
+  --text:        #f0e0e3;      /* warm off-white */
+  --text-muted:  #8a6b72;      /* muted rose-grey */
+  --text-dim:    #4a2e35;      /* very dim placeholder text */
+  
+  --accent:      #b91c1c;      /* blood red primary */
+  --accent-2:    #dc2626;      /* brighter red hover */
+  --accent-glow: rgba(185, 28, 28, 0.20);
+  --accent-subtle: rgba(185, 28, 28, 0.08);
+  
+  --danger:      #ff2020;
+  --success:     #16a34a;
+  
+  --foreground: var(--text);
+  --background: var(--bg);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* LIGHT MODE */
+[data-theme="light"] {
+  --bg:          #fdf5f5;      /* warm near-white */
+  --bg-2:        #f5e8ea;      /* light pinkish panel */
+  --bg-3:        #ede0e2;      /* card / sidebar */
+  --border:      #e0c5c8;      /* light dusty rose border */
+  --border-2:    #c9a0a7;      /* slightly deeper border */
+  --text:        #1a0608;      /* very dark burgundy/black */
+  --text-muted:  #7a4a52;      /* muted dark rose */
+  --text-dim:    #c0949a;      /* dim placeholder */
+  
+  --accent:      #b91c1c;      /* same blood red */
+  --accent-2:    #991b1b;      /* darker red on light bg */
+  --accent-glow: rgba(185, 28, 28, 0.15);
+  --accent-subtle: rgba(185, 28, 28, 0.06);
+  
+  --danger:      #dc2020;
+  --success:     #15803d;
+  
+  --foreground: var(--text);
+  --background: var(--bg);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ==========================================
+   BASE STYLES
+   ========================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-2); }
+::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* Input base */
+input, textarea {
+  background-color: var(--bg-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  transition: border-color 0.2s;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-dim);
+}
+
+/* Selection */
+::selection {
+  background: var(--accent);
+  color: white;
 }
